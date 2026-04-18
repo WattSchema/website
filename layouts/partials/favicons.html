@@ -1,0 +1,6 @@
+{{- $favicon := resources.Get "images/logo-mark.svg" -}}
+{{- with $favicon }}
+  <link rel="icon" href="{{ .RelPermalink }}" type="image/svg+xml" id="favicon-svg" />
+  <link rel="shortcut icon" href="{{ .RelPermalink }}" type="image/svg+xml" />
+{{- end }}
+<link fetchpriority="low" href="{{ "site.webmanifest" | relURL }}" rel="manifest" />

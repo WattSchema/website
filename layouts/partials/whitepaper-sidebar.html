@@ -1,0 +1,74 @@
+{{ $page := . }}
+{{ $navRoot := cond .IsSection . .CurrentSection }}
+{{ $rootIsActive := eq $navRoot.RelPermalink $page.RelPermalink }}
+{{ $rootLabel := "Executive Summary" }}
+{{ $currentNavLabel := cond $rootIsActive $rootLabel ($page.LinkTitle | default $page.Title) }}
+{{ $rootLinkClass := "ws-sidebar-root hx:mb-2 hx:block hx:rounded-2xl hx:px-4 hx:py-3 hx:text-[1.02rem] hx:font-semibold hx:tracking-[-0.02em] hx:text-slate-950 hx:no-underline hx:transition-colors hover:hx:bg-teal-700/10 hover:hx:text-teal-700 hx:dark:text-slate-50 hx:dark:hover:bg-teal-300/12 hx:dark:hover:text-teal-300" }}
+{{ if $rootIsActive }}
+  {{ $rootLinkClass = printf "%s ws-is-active hx:bg-teal-700/10 hx:text-teal-700 hx:dark:bg-teal-300/12 hx:dark:text-teal-300" $rootLinkClass }}
+{{ end }}
+
+{{ $navSurfaceClass := "ws-sidebar-surface hx:relative hx:overflow-hidden hx:rounded-3xl hx:border hx:border-teal-700/12 hx:bg-gradient-to-br hx:from-slate-50 hx:via-emerald-50/90 hx:to-cyan-50/75 hx:shadow-[0_18px_45px_-30px_rgba(15,23,42,0.45)] hx:backdrop-blur-sm hx:dark:border-teal-300/20 hx:dark:from-slate-950 hx:dark:via-cyan-950/60 hx:dark:to-slate-900" }}
+
+<aside class="hx:w-full hx:px-4 hx:pt-4 hx:sm:px-6 hx:md:hidden hx:print:hidden">
+  <details class="hx:group {{ $navSurfaceClass }}">
+    <div class="hx:pointer-events-none hx:absolute hx:-right-14 hx:-top-12 hx:h-36 hx:w-36 hx:rounded-full hx:bg-teal-700/10 hx:blur-3xl hx:dark:bg-teal-300/15"></div>
+    <div class="hx:pointer-events-none hx:absolute hx:-left-10 hx:bottom-0 hx:h-28 hx:w-28 hx:rounded-full hx:bg-sky-500/10 hx:blur-3xl hx:dark:bg-sky-400/10"></div>
+    <summary class="hx:flex hx:cursor-pointer hx:list-none hx:items-center hx:justify-between hx:gap-4 hx:px-5 hx:py-4 marker:hx:hidden">
+      <div class="hx:relative hx:z-10 hx:min-w-0">
+        <p class="ws-sidebar-eyebrow hx:mb-1 hx:text-xs hx:font-bold hx:uppercase hx:tracking-[0.14em] hx:text-teal-700 hx:dark:text-teal-300">White Paper</p>
+        <p class="hx:truncate hx:text-sm hx:font-semibold hx:text-slate-950 hx:dark:text-slate-50">{{ $currentNavLabel }}</p>
+      </div>
+      <svg class="hx:relative hx:z-10 hx:h-4 hx:w-4 hx:shrink-0 hx:text-slate-500 hx:transition-transform group-open:hx:rotate-180 hx:dark:text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m6 9 6 6 6-6" />
+      </svg>
+    </summary>
+    <div class="hx:relative hx:z-10 hx:border-t hx:border-teal-700/12 hx:bg-white/35 hx:px-3 hx:pt-3 hx:pb-4 hx:backdrop-blur-[2px] hx:dark:border-teal-300/15 hx:dark:bg-slate-950/20">
+      <a class="{{ $rootLinkClass }}" href="{{ $navRoot.RelPermalink }}"{{ if $rootIsActive }} aria-current="page"{{ end }}>{{ $rootLabel }}</a>
+      <ul class="hx:m-0 hx:list-none hx:space-y-1 hx:p-0">
+        {{ template "whitepaper-nav-tree" (dict "page" $page "node" $navRoot) }}
+      </ul>
+    </div>
+  </details>
+</aside>
+
+<aside class="hx:w-72 hx:shrink-0 hx:pr-4 hx:pt-6 hx:max-md:hidden hx:md:self-start hx:print:hidden">
+  <div class="hx:sticky hx:top-20 {{ $navSurfaceClass }} hx:p-6">
+    <div class="hx:pointer-events-none hx:absolute hx:-right-14 hx:-top-12 hx:h-36 hx:w-36 hx:rounded-full hx:bg-teal-700/10 hx:blur-3xl hx:dark:bg-teal-300/15"></div>
+    <div class="hx:pointer-events-none hx:absolute hx:-left-10 hx:bottom-0 hx:h-28 hx:w-28 hx:rounded-full hx:bg-sky-500/10 hx:blur-3xl hx:dark:bg-sky-400/10"></div>
+    <div class="hx:relative hx:z-10">
+      <p class="ws-sidebar-eyebrow hx:mb-2 hx:text-xs hx:font-bold hx:uppercase hx:tracking-[0.14em] hx:text-teal-700 hx:dark:text-teal-300">White Paper</p>
+      <a class="{{ $rootLinkClass }}" href="{{ $navRoot.RelPermalink }}"{{ if $rootIsActive }} aria-current="page"{{ end }}>{{ $rootLabel }}</a>
+      <ul class="hx:m-0 hx:list-none hx:space-y-1 hx:p-0">
+        {{ template "whitepaper-nav-tree" (dict "page" $page "node" $navRoot) }}
+      </ul>
+    </div>
+  </div>
+</aside>
+
+{{ define "whitepaper-nav-tree" }}
+  {{ $page := .page }}
+  {{ $node := .node }}
+  {{ $children := union $node.Sections $node.RegularPages }}
+  {{ range sort $children "Weight" "asc" }}
+    {{ $isActive := eq .RelPermalink $page.RelPermalink }}
+    {{ $isOpen := or $isActive (.IsAncestor $page) }}
+    {{ $linkClass := "ws-sidebar-link hx:block hx:rounded-xl hx:px-3 hx:py-2 hx:text-sm hx:leading-6 hx:text-slate-700 hx:no-underline hx:transition-colors hover:hx:bg-teal-700/10 hover:hx:text-teal-700 hx:dark:text-slate-300 hx:dark:hover:bg-teal-300/12 hx:dark:hover:text-teal-300" }}
+    {{ if $isActive }}
+      {{ $linkClass = printf "%s ws-is-active hx:bg-teal-700/10 hx:font-medium hx:text-teal-700 hx:dark:bg-teal-300/12 hx:dark:text-teal-300" $linkClass }}
+    {{ end }}
+    <li>
+      <a class="{{ $linkClass }}" href="{{ .RelPermalink }}">{{ .LinkTitle | default .Title }}</a>
+      {{ $nested := union .Sections .RegularPages }}
+      {{ if gt (len $nested) 0 }}
+        {{ $subnavClass := "hx:mt-1 hx:ml-4 hx:list-none hx:space-y-1 hx:border-l hx:border-slate-200/80 hx:pl-3 hx:dark:border-slate-700/70" }}
+        {{ if not $isOpen }}
+          {{ $subnavClass = printf "%s hx:hidden" $subnavClass }}
+        {{ end }}
+        <ul class="{{ $subnavClass }}">
+          {{ template "whitepaper-nav-tree" (dict "page" $page "node" .) }}
+        </ul>
+      {{ end }}
+    </li>
+  {{ end }}
+{{ end }}

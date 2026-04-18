@@ -1,0 +1,39 @@
+baseURL: https://wattschema.org/
+locale: en-us
+title: WattSchema
+theme: hextra
+
+params:
+  search:
+    enable: true
+    type: flexsearch
+    flexsearch:
+      js: "js/vendor/flexsearch.bundle.min.js"
+  footer:
+    width: full
+    displayPoweredBy: false
+    displayCopyright: false
+
+menu:
+  main:
+    - identifier: resources
+      name: Resources
+      weight: 1
+    - name: Ontology Documentation
+      url: "https://github.com/WattSchema/WattSchema/blob/main/DCPM/ontology/document/DCPM_Ontology_CORE_OVERVIEW.md"
+      parent: resources
+    - name: Class Browser
+      url: "https://explore.wattschema.org/"
+      parent: resources
+    - identifier: github
+      name: GitHub
+      url: "https://github.com/WattSchema/WattSchema"
+      parent: resources
+    - name: News
+      pageRef: /news
+      weight: 2
+    - name: GitHub
+      weight: 3
+      url: "https://github.com/WattSchema/WattSchema"
+      params:
+        icon: github

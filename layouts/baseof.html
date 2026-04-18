@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}" dir="{{ .Site.Language.LanguageDirection | default `ltr` }}">
+  {{- partial "head.html" . -}}
+  <body class="hx:flex hx:min-h-screen hx:flex-col">
+    <a href="#content" class="hx:sr-only hx:focus-visible:not-sr-only hx:focus-visible:fixed hx:focus-visible:z-50 hx:focus-visible:top-2 hx:focus-visible:left-2 hx:focus-visible:bg-primary-500 hx:focus-visible:text-white hx:focus-visible:px-4 hx:focus-visible:py-2 hx:focus-visible:rounded-md hx:focus-visible:text-sm hx:focus-visible:font-medium">
+      {{- (T "skipToContent") | default "Skip to content" -}}
+    </a>
+    <header class="hx:flex-none">
+      {{- partial "banner.html" . -}}
+      {{- partial "navbar.html" . -}}
+    </header>
+    <div class="hx:flex-[1_1_auto]">
+      {{- block "main" . }}{{ end -}}
+    </div>
+    {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}
+      <div class="hx:flex-none">
+        {{ partial "footer.html" . }}
+      </div>
+    {{ end }}
+    {{ partial "scripts.html" . }}
+  </body>
+</html>

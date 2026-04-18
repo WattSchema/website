@@ -1,2 +1,2 @@
 # WattSchema.org Website
-See more at <<https://wattschema.org>>
+See more at <https://wattschema.org>
