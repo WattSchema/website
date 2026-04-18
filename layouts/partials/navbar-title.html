@@ -1,0 +1,10 @@
+{{- $logoLink := .Site.Home.RelPermalink -}}
+{{- $logo := resources.Get "images/logo-main.svg" -}}
+
+<a class="ws-navbar-brand hx:flex hx:items-center hx:ltr:mr-auto hx:rtl:ml-auto" href="{{ $logoLink }}">
+  {{- with $logo }}
+    <img class="ws-navbar-logo ws-navbar-logo-main hx:block" src="{{ .RelPermalink }}" alt="{{ $.Site.Title }}" width="120" />
+  {{- else }}
+    <span class="ws-navbar-title hx:inline hx:select-none hx:font-extrabold">{{- .Site.Title -}}</span>
+  {{- end }}
+</a>

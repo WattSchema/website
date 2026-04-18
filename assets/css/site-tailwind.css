@@ -1,0 +1,5 @@
+@import "../../themes/hextra/node_modules/tailwindcss/index.css" prefix(hx);
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@source "../../hugo_stats.json";

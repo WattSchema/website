@@ -1,0 +1,102 @@
+{{ define "main" }}
+  {{ $repoURL := "https://github.com/WattSchema/WattSchema" }}
+  {{ $fabricURL := "https://learn.microsoft.com/en-us/fabric/iq/ontology/overview" }}
+  {{ $newsURL := "/news/" | relURL }}
+  {{ $whitepaperURL := "/news/white-paper/" | relURL }}
+  {{ $newsPosts := first 2 (sort (where site.RegularPages "Params.news.post" true) "Date" "desc") }}
+
+  {{ $sectionClass := "hx:mb-12 hx:md:mb-14" }}
+  {{ $sectionHeadingClass := "hx:mb-6" }}
+  {{ $sectionTitleClass := "hx:m-0 hx:text-[clamp(1.9rem,3vw,3rem)] hx:font-semibold hx:leading-tight hx:tracking-[-0.03em] hx:text-slate-950 hx:dark:text-slate-50" }}
+  {{ $sectionLeadClass := "hx:mt-4 hx:max-w-4xl hx:text-[1.05rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300" }}
+  {{ $cardClass := "ws-card hx:rounded-3xl hx:border hx:border-slate-200/70 hx:bg-white/85 hx:p-6 hx:shadow-[0_16px_40px_rgba(15,23,42,0.05)] hx:backdrop-blur-sm hx:dark:border-slate-700/70 hx:dark:bg-slate-900/75 hx:dark:shadow-none" }}
+  {{ $cardTitleClass := "hx:mt-0 hx:mb-3 hx:text-lg hx:font-semibold hx:tracking-[-0.02em] hx:text-slate-950 hx:dark:text-slate-50" }}
+  {{ $linkClass := "ws-link hx:font-semibold hx:text-teal-700 hx:no-underline hover:hx:underline hover:hx:decoration-current hover:hx:underline-offset-4 hx:dark:text-teal-300" }}
+  {{ $buttonBaseClass := "hx:inline-flex hx:min-h-12 hx:items-center hx:justify-center hx:rounded-full hx:px-5 hx:py-3 hx:text-sm hx:font-semibold hx:transition hx:duration-200 hover:hx:-translate-y-0.5" }}
+  {{ $resourceCardClass := "ws-resource-card hx:block hx:rounded-3xl hx:border hx:border-slate-200/70 hx:bg-white/85 hx:p-6 hx:text-inherit hx:no-underline hx:shadow-[0_16px_40px_rgba(15,23,42,0.05)] hx:transition hx:duration-200 hover:hx:-translate-y-0.5 hover:hx:border-teal-700/35 hx:dark:border-slate-700/70 hx:dark:bg-slate-900/75 hx:dark:shadow-none hx:dark:hover:border-teal-300/40" }}
+
+  <div class="hx:mx-auto hx:flex hextra-max-navbar-width">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true) }}
+    <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-8 hx:pb-16">
+      <section class="ws-hero hx:relative hx:mb-12 hx:overflow-hidden hx:rounded-[2rem] hx:border hx:border-teal-700/12 hx:bg-gradient-to-br hx:from-slate-50 hx:via-emerald-50/90 hx:to-cyan-50/75 hx:p-[clamp(2rem,4vw,3.5rem)] hx:dark:border-teal-300/20 hx:dark:from-slate-950 hx:dark:via-cyan-950/60 hx:dark:to-slate-900">
+        <div class="hx:pointer-events-none hx:absolute hx:-right-20 hx:-bottom-28 hx:h-72 hx:w-72 hx:rounded-full hx:bg-teal-700/10 hx:blur-3xl hx:dark:bg-teal-300/15"></div>
+        <div class="hx:pointer-events-none hx:absolute hx:-left-16 hx:top-0 hx:h-56 hx:w-56 hx:rounded-full hx:bg-sky-500/10 hx:blur-3xl hx:dark:bg-sky-400/10"></div>
+
+        <div class="hx:relative hx:z-10 hx:max-w-4xl">
+          <h1 class="ws-display hx:m-0 hx:max-w-[11ch] hx:text-[clamp(2.8rem,7vw,5.25rem)] hx:font-semibold hx:leading-none hx:tracking-[-0.03em] hx:text-slate-950 hx:dark:text-slate-50 hx:max-md:max-w-none hx:max-md:text-[clamp(2.4rem,12vw,3.4rem)]">
+            Welcome to WattSchema
+          </h1>
+          <p class="hx:mt-5 hx:max-w-3xl hx:text-[1.1rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">
+            A common language system (ontology) that allows all parts of your data center and energy infrastructure — from software and sensors to people — to communicate clearly and integrate efficiently.
+          </p>
+          <div class="hx:mt-8 hx:flex hx:flex-wrap hx:gap-4 hx:max-md:gap-3">
+            <a class="ws-button-primary {{ $buttonBaseClass }} hx:bg-teal-700 hx:px-6 hx:text-slate-50 hx:shadow-[0_12px_30px_rgba(15,118,110,0.18)] hover:hx:bg-teal-800" href="{{ $repoURL }}" target="_blank" rel="noreferrer">Get WattSchema</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="{{ $sectionClass }}">
+        <div class="{{ $sectionHeadingClass }}">
+          <h2 class="{{ $sectionTitleClass }}">Why Use an Open-Source Ontology?</h2>
+          <p class="{{ $sectionLeadClass }}">
+            Data center power systems are increasingly complex — with interdependent infrastructures, distributed energy resources, and strict reliability requirements. An open-source ontology, like WattSchema, unifies every stream of data.
+          </p>
+        </div>
+        <div class="hx:grid hx:gap-5 hx:md:grid-cols-2 hx:xl:grid-cols-3">
+          <article class="{{ $cardClass }}">
+            <p class="hx:m-0 hx:text-[1.02rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">Aligns assets, loads, tariffs, and operational constraints into a single language model.</p>
+          </article>
+          <article class="{{ $cardClass }}">
+            <p class="hx:m-0 hx:text-[1.02rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">Defines the terms and relationships, enabling different systems to “speak” to each other.</p>
+          </article>
+          <article class="{{ $cardClass }}">
+            <p class="hx:m-0 hx:text-[1.02rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">Allows AI agents to interpret data correctly, make smart decisions, and operate optimally.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="{{ $sectionClass }}">
+        <div class="{{ $sectionHeadingClass }}">
+          <h2 class="{{ $sectionTitleClass }}">Get Your Own Machine-Interpretable Source of Truth</h2>
+        </div>
+        <article class="{{ $cardClass }}">
+          <p class="hx:m-0 hx:text-[1.02rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">
+            <a class="{{ $linkClass }}" href="{{ $repoURL }}" target="_blank" rel="noreferrer">Download WattSchema from GitHub</a> for a consistent, machine-readable foundation that supports integration, validation, simulation, analytics, and automation across all vendors and tools. Plus, help WattSchema evolve by contributing to the community.
+          </p>
+        </article>
+      </section>
+
+      <section class="{{ $sectionClass }}">
+        <div class="{{ $sectionHeadingClass }}">
+          <h2 class="{{ $sectionTitleClass }}">Have Questions?</h2>
+        </div>
+        <article class="{{ $cardClass }}">
+          <p class="hx:m-0 hx:text-[1.02rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">
+            You can send questions, comments, or bugs to <a class="{{ $linkClass }}" href="mailto:info@WattSchema.org">info@WattSchema.org</a>.
+          </p>
+        </article>
+      </section>
+
+     
+
+      <section class="{{ $sectionClass }}">
+        <div class="{{ $sectionHeadingClass }}">
+          <h2 class="{{ $sectionTitleClass }}">Standards Alignment</h2>
+          <p class="{{ $sectionLeadClass }}">
+            WattSchema was built in alignment with the following existing standards:
+          </p>
+        </div>
+        <article class="{{ $cardClass }}">
+          <ul class="hx:m-0 hx:list-disc hx:space-y-3 hx:pl-5 hx:text-[1.02rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">
+            <li><a class="{{ $linkClass }}" href="https://brickschema.org/" target="_blank" rel="noreferrer">Brick Schema</a> for building and equipment taxonomy</li>
+            <li><a class="{{ $linkClass }}" href="https://open223.info/" target="_blank" rel="noreferrer">ASHRAE 223P</a> for physical systems semantics</li>
+            <li><a class="{{ $linkClass }}" href="https://qudt.org/" target="_blank" rel="noreferrer">QUDT</a> for units and quantities</li>
+            <li><a class="{{ $linkClass }}" href="https://opcfoundation.org/" target="_blank" rel="noreferrer">OPC UA DI</a> for device metadata interoperability</li>
+            <li><a class="{{ $linkClass }}" href="https://www.w3.org/OWL/" target="_blank" rel="noreferrer">W3C OWL/RDF</a> and <a class="{{ $linkClass }}" href="https://www.w3.org/TR/shacl/" target="_blank" rel="noreferrer">SHACL</a> for formal modeling and validation</li>
+            <li>Preliminary support for <a class="{{ $linkClass }}" href="{{ $fabricURL }}" target="_blank" rel="noreferrer">Microsoft Fabric</a></li>
+          </ul>
+        </article>
+      </section>
+    </main>
+  </div>
+{{ end }}

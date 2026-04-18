@@ -1,0 +1,19 @@
+{{ define "main" }}
+  <div class="hx:mx-auto hx:flex hx:flex-col hx:items-stretch hx:md:flex-row hx:md:items-start hextra-max-page-width">
+    {{ partial "whitepaper-sidebar.html" . }}
+    {{ partial "toc.html" . }}
+    <article class="hx:w-full hx:min-w-0 hx:flex hx:justify-center hx:pb-12">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-6 hx:pb-16 hx:md:px-12">
+        <section class="hx:mb-12">
+          <p class="ws-page-eyebrow hx:mb-3 hx:text-xs hx:font-bold hx:uppercase hx:tracking-[0.16em] hx:text-teal-700 hx:dark:text-teal-300">White Paper</p>
+          <h1 class="hx:m-0 hx:text-4xl hx:font-semibold hx:leading-tight hx:tracking-[-0.03em] hx:text-slate-950 hx:dark:text-slate-50 hx:md:text-5xl">{{ .Title }}</h1>
+          <p class="hx:mt-4 hx:text-sm hx:text-slate-500 hx:dark:text-slate-400">{{ .Date.Format "January 2, 2006" }}</p>
+          {{ with .Description }}<p class="hx:mt-4 hx:max-w-3xl hx:text-[1.05rem] hx:leading-8 hx:text-slate-700 hx:dark:text-slate-300">{{ . }}</p>{{ end }}
+        </section>
+        <div class="content hx:mb-16">
+          {{ .Content }}
+        </div>
+      </main>
+    </article>
+  </div>
+{{ end }}
