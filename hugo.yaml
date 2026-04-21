@@ -19,6 +19,9 @@ menu:
     - identifier: resources
       name: Resources
       weight: 1
+    - name: White Paper
+      pageRef: /news/white-paper
+      parent: resources
     - name: Ontology Documentation
       url: "https://github.com/WattSchema/WattSchema/blob/main/DCPM/ontology/document/DCPM_Ontology_CORE_OVERVIEW.md"
       parent: resources
