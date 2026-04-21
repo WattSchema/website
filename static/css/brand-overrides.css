@@ -64,7 +64,7 @@ body {
 .hextra-nav-container .hextra-theme-toggle,
 .hextra-nav-container .hextra-language-switcher,
 .hextra-nav-container .hextra-hamburger-menu,
-.hextra-nav-container .hx:p-2.hx:text-current {
+.hextra-nav-container .hx\:p-2.hx\:text-current  {
   color: rgba(255, 255, 255, 0.94) !important;
 }
 
@@ -73,7 +73,7 @@ body {
 .hextra-nav-container .hextra-theme-toggle svg,
 .hextra-nav-container .hextra-language-switcher svg,
 .hextra-nav-container .hextra-hamburger-menu svg,
-.hextra-nav-container .hx:p-2.hx:text-current svg {
+.hextra-nav-container .hx\:p-2.hx\:text-current svg {
   color: inherit !important;
 }
 
@@ -82,7 +82,7 @@ body {
 .hextra-nav-container .hextra-theme-toggle:hover,
 .hextra-nav-container .hextra-language-switcher:hover,
 .hextra-nav-container .hextra-hamburger-menu:hover,
-.hextra-nav-container .hx:p-2.hx:text-current:hover {
+.hextra-nav-container .hx\:p-2.hx\:text-current:hover {
   color: var(--ws-white) !important;
   background: rgba(255, 255, 255, 0.08);
 }
@@ -303,7 +303,7 @@ body {
 
 .hextra-sidebar-container,
 .hextra-sidebar-active-item,
-.hextra-toc .hx:sticky {
+.hextra-toc .hx\:sticky {
   border-color: rgba(var(--ws-primary-rgb), 0.1);
 }
 

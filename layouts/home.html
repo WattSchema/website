@@ -77,6 +77,26 @@
         </article>
       </section>
 
+      <section class="{{ $sectionClass }}">
+        <div class="{{ $sectionHeadingClass }}">
+          <h2 class="{{ $sectionTitleClass }}">You Might Also Be Interested In</h2>
+        </div>
+        <div class="hx:grid hx:gap-5 hx:md:grid-cols-2 hx:xl:grid-cols-3">
+          <a class="{{ $resourceCardClass }}" href="{{ $whitepaperURL }}">
+            <p class="ws-page-eyebrow hx:mb-3 hx:text-xs hx:font-bold hx:uppercase hx:tracking-[0.16em] hx:text-teal-700 hx:dark:text-teal-300">WHITEPAPER</p>
+            <h3 class="{{ $cardTitleClass }} hx:mb-0">An Open-Source Ontology for Data Center Power Management</h3>
+          </a>
+          {{ range $newsPosts }}
+            <a class="{{ $resourceCardClass }}" href="{{ .RelPermalink }}">
+              <p class="ws-page-eyebrow hx:mb-3 hx:text-xs hx:font-bold hx:uppercase hx:tracking-[0.16em] hx:text-teal-700 hx:dark:text-teal-300">NEWS</p>
+              <h3 class="{{ $cardTitleClass }} hx:mb-0">{{ .Title }}</h3>
+            </a>
+          {{ end }}
+        </div>
+        <div class="hx:mt-8">
+          <a class="ws-button-secondary {{ $buttonBaseClass }} hx:bg-teal-700 hx:px-6 hx:text-slate-50 hx:shadow-[0_12px_30px_rgba(15,118,110,0.18)] hover:hx:bg-teal-800" href="{{ $newsURL }}">See More</a>
+        </div>
+      </section>
      
 
       <section class="{{ $sectionClass }}">
