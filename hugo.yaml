@@ -23,7 +23,7 @@ menu:
       pageRef: /news/white-paper
       parent: resources
     - name: Ontology Documentation
-      url: "https://github.com/WattSchema/WattSchema/blob/main/DCPM/ontology/document/DCPM_Ontology_CORE_OVERVIEW.md"
+      url: "https://github.com/WattSchema/WattSchema/blob/main/WattSchema/ontology/document/WattSchema_CORE_OVERVIEW.md"
       parent: resources
     - name: Class Browser
       url: "https://explore.wattschema.org/"
